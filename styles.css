@@ -1,0 +1,90 @@
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Raleway", sans-serif;
+}
+body {
+  height: 100vh;
+  background-color:cornflowerblue; 
+}
+html {
+  font-size: 16px;
+}
+.wrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.container {
+  width: 50vmin; 
+  height: 50vmin;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vmin; 
+}
+
+.button-option {
+  background: #ffffff;
+  height: 15vmin; 
+  width: 15vmin;
+  border: none;
+  border-radius: 5px;
+  font-size: 10vmin;
+  color:darkslategrey; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#restart {
+  font-size: 1.2em; 
+  padding: 0.8em; 
+  border-radius: 8px;
+  background-color:darkslateblue; 
+  color:whitesmoke;
+  border: none;
+  position: relative;
+  margin: 1em auto 0 auto; 
+  display: block;
+}
+#restart:hover{
+  background-color:azure;
+  color:cornflowerblue;
+}
+
+.popup {
+  background-color:darkcyan;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+  font-size: 6vmin; 
+}
+#new-game {
+  font-size: 0.8em; 
+  padding: 0.5em 1em;
+  background-color:whitesmoke; 
+  color:darkslateblue;
+  border-radius: 0.2em;
+  border: none;
+}
+#new-game:hover{
+  background-color: darkslateblue;
+  color:wheat;
+}
+#message {
+  color: #ffffff;
+  text-align: center;
+  font-size: 1em;
+}
+
+.popup.hide {
+  display: none;
+}
