@@ -33,15 +33,15 @@ const enableButtons = () => {
 const winFunction = (letter) => {
   disableButtons();
   if (letter == "X") {
-    msg.innerHTML = "&#x1F389; <br> 'X' Wins";
+    msg.innerHTML = "'X' Wins";
   } else {
-    msg.innerHTML = "&#x1F389; <br> 'O' Wins";
+    msg.innerHTML = "'O' Wins";
   }
 };
 
 const drawFunction = () => {
   disableButtons();
-  msg.innerHTML = "&#x1F60E; <br> It's a Draw";
+  msg.innerHTML = "It's a Draw";
 };
 
 newgame.addEventListener("click", () => {
