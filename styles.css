@@ -1,90 +1,64 @@
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Raleway", sans-serif;
-}
 body {
+  font-family:'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
-  background-color:cornflowerblue; 
+  background-color:cadetblue;
+  margin: 0;
 }
-html {
-  font-size: 16px;
-}
-.wrapper {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
+
+.game-container {
+  text-align: center;
 }
 
 .container {
-  width: 50vmin; 
-  height: 50vmin;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1vmin; 
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 5px;
+  margin: 20px auto;
 }
 
 .button-option {
-  background: #ffffff;
-  height: 15vmin; 
-  width: 15vmin;
-  border: none;
-  border-radius: 5px;
-  font-size: 10vmin;
-  color:darkslategrey; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100px;
+  height: 100px;
+  font-size: 2rem;
+  background-color:aliceblue;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+.button-option:hover{
+  background-color:lightsteelblue;
+  color: aliceblue;
 }
 
-#restart {
-  font-size: 1.2em; 
-  padding: 0.8em; 
-  border-radius: 8px;
-  background-color:darkslateblue; 
-  color:whitesmoke;
-  border: none;
-  position: relative;
-  margin: 1em auto 0 auto; 
-  display: block;
+.restart-button, .game-mode-select {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 1rem;
 }
-#restart:hover{
-  background-color:azure;
-  color:cornflowerblue;
+.restart-button:hover{
+  background-color:midnightblue;
+  color: whitesmoke;
 }
 
 .popup {
-  background-color:darkcyan;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  display: flex;
-  z-index: 2;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1em;
-  font-size: 6vmin; 
-}
-#new-game {
-  font-size: 0.8em; 
-  padding: 0.5em 1em;
-  background-color:whitesmoke; 
-  color:darkslateblue;
-  border-radius: 0.2em;
-  border: none;
-}
-#new-game:hover{
-  background-color: darkslateblue;
-  color:wheat;
-}
-#message {
-  color: #ffffff;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background:cornflowerblue;
+  color: black;
+  padding: 20px;
+  border: 2px solid #000;
   text-align: center;
-  font-size: 1em;
 }
 
-.popup.hide {
+.popup.show {
+  display: block;
+}
+
+.hide {
   display: none;
 }
