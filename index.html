@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TicTacToe</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-   <div class="wrapper">
-       <div class="container">
-           <button class="button-option"></button>
-           <button class="button-option"></button>
-           <button class="button-option"></button>
-           <button class="button-option"></button>
-           <button class="button-option"></button>
-           <button class="button-option"></button>
-           <button class="button-option"></button>
-           <button class="button-option"></button>
-           <button class="button-option"></button>
-       </div>
-       <button id="restart">Restart</button>
-   </div>
+    <section class="game-container">
+        <h1 class="game-title">Tic-Tac-Toe</h1>
+        <div id="game-board" class="container">
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+            <button class="button-option"></button>
+        </div>
+        <button id="restart" class="restart-button">Restart Game</button>
+        <select id="game-mode-select" class="game-mode-select">
+            <option value="two-players">Two Players</option>
+            <option value="ai">AI Opponent</option>
+        </select>
+    </section>
+    
+    <div class="popup hide">
+        <p id="message">Sample</p>
+        <button id="new-game">New Game</button>
+    </div>
 
-   <div class="popup hide">
-       <p id="message">Sample </p>
-       <button id="new-game">New Game</button>
-   </div>
     <script src="script.js"></script>
 </body>
 </html>
