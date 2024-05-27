@@ -1,89 +1,109 @@
-let Ref = document.querySelectorAll(".button-option");
-let popup = document.querySelector(".popup");
-let newgame = document.getElementById("new-game");
-let restart = document.getElementById("restart");
-let msg = document.getElementById("message");
-let winningPattern = [
-  [0, 1, 2],
-  [0, 3, 6],
-  [2, 5, 8],
-  [6, 7, 8],
-  [3, 4, 5],
-  [1, 4, 7],
-  [0, 4, 8],
-  [2, 4, 6],
-];
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".button-option");
+  const gameStatus = document.getElementById("message");
+  const restartButton = document.getElementById("restart");
+  const gameModeSelect = document.getElementById("game-mode-select");
+  const popup = document.querySelector(".popup");
+  const newGameButton = document.getElementById("new-game");
+  
+  let currentPlayer = "X";
+  let gameActive = true;
+  let gameMode = "two-players";
+  let board = Array(9).fill(null);
 
-let xTurn = true;
-let count = 0;
-
-const disableButtons = () => {
-  Ref.forEach((element) => (element.disabled = true));
-  popup.classList.remove("hide");
-};
-
-const enableButtons = () => {
-  Ref.forEach((element) => {
-    element.innerText = "";
-    element.disabled = false;
-  });
-  popup.classList.add("hide");
-};
-
-const winFunction = (letter) => {
-  disableButtons();
-  if (letter == "X") {
-    msg.innerHTML = "'X' Wins";
-  } else {
-    msg.innerHTML = "'O' Wins";
+  function initializeGame() {
+      buttons.forEach((button, index) => {
+          button.textContent = "";
+          button.addEventListener("click", () => handleButtonClick(index));
+      });
+      restartButton.addEventListener("click", resetGame);
+      newGameButton.addEventListener("click", resetGame);
+      gameModeSelect.addEventListener("change", handleGameModeChange);
+      updateGameStatus();
   }
-};
 
-const drawFunction = () => {
-  disableButtons();
-  msg.innerHTML = "It's a Draw";
-};
+  function handleButtonClick(index) {
+      if (board[index] !== null || !gameActive) return;
 
-newgame.addEventListener("click", () => {
-  count = 0;
-  enableButtons();
-});
-restart.addEventListener("click", () => {
-  count = 0;
-  enableButtons();
-});
+      board[index] = currentPlayer;
+      buttons[index].textContent = currentPlayer;
+      checkForWinner();
 
-const winChecker = () => {
-  for (let i of winningPattern) {
-    let [element1, element2, element3] = [
-      Ref[i[0]].innerText,
-      Ref[i[1]].innerText,
-      Ref[i[2]].innerText,
-    ];
-    if (element1 != "" && (element2 != "") & (element3 != "")) {
-      if (element1 == element2 && element2 == element3) {
-        winFunction(element1);
+      if (gameMode === "ai" && gameActive) {
+          makeAIMove();
+      } else {
+          currentPlayer = currentPlayer === "X" ? "O" : "X";
+          updateGameStatus();
       }
-    }
   }
-};
 
-Ref.forEach((element) => {
-  element.addEventListener("click", () => {
-    if (xTurn) {
-      xTurn = false;
-      element.innerText = "X";
-      element.disabled = true;
-    } else {
-      xTurn = true;
-      element.innerText = "O";
-      element.disabled = true;
-    }
-    count += 1;
-    if (count == 9) {
-      drawFunction();
-    }
-    winChecker();
-  });
+  function checkForWinner() {
+      const winningCombinations = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6]
+      ];
+
+      let roundWon = false;
+      for (let i = 0; i < winningCombinations.length; i++) {
+          const [a, b, c] = winningCombinations[i];
+          if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+              roundWon = true;
+              break;
+          }
+      }
+
+      if (roundWon) {
+          gameStatus.textContent = `${currentPlayer} wins!`;
+          gameActive = false;
+          popup.classList.add("show");
+          return;
+      }
+
+      if (!board.includes(null)) {
+          gameStatus.textContent = "It's a tie!";
+          gameActive = false;
+          popup.classList.add("show");
+          return;
+      }
+  }
+
+  function makeAIMove() {
+      const emptyIndices = board.map((value, index) => value === null ? index : null).filter(index => index !== null);
+      const randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+      board[randomIndex] = "O";
+      buttons[randomIndex].textContent = "O";
+      checkForWinner();
+      if (gameActive) {
+          currentPlayer = "X";
+          updateGameStatus();
+      }
+  }
+
+  function handleGameModeChange(event) {
+      gameMode = event.target.value;
+      resetGame();
+  }
+
+  function updateGameStatus() {
+      if (gameActive) {
+          gameStatus.textContent = `${currentPlayer}'s turn`;
+      }
+  }
+
+  function resetGame() {
+      currentPlayer = "X";
+      gameActive = true;
+      board.fill(null);
+      buttons.forEach(button => button.textContent = "");
+      popup.classList.remove("show");
+      updateGameStatus();
+  }
+
+  initializeGame();
 });
-window.onload = enableButtons;
